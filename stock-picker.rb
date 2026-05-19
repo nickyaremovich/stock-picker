@@ -1,18 +1,24 @@
-stocks = [17,3,6,9,15,8,6,1,10]
+stocks = [70,43,26,39,15,38,36,41,10]
 
 def stock_picker(prices)
-  best_profit = 0
+  lowest_price = prices[0]
+  index_lowest = 0
+  profit = 0
   best_days = []
-  prices.each_with_index do |buy, index|
-    (index + 1...prices.length).each do |sell|
-      profit = prices[sell] - buy
-      if profit > best_profit
-        best_profit = profit
-        best_days = [index, sell]
-      end
+  prices.each_with_index do |price, index|
+    if lowest_price > price
+      lowest_price = price
+      index_lowest = index
     end
+    if price - lowest_price > profit
+      profit = price - lowest_price
+      best_days = [index_lowest, index]
+      
+    end
+    puts profit
   end
   best_days
+  
 end
 
 p stock_picker(stocks)
